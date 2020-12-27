@@ -24,8 +24,13 @@ def add_product():
 
 
 def view_product():
-    pass
-
+    with open('data.json','r') as j_f:
+        data=json.load(j_f)
+        for product_id, product in data['products'].items():
+            print(f"Product ID: {product_id}")
+            print(f"Product Name: {product['name']}")
+            print(f"Price: {product['price']}")
+            print("-" * 10)
 
 def search_product():
     product_name = input('Search product: ').strip()
@@ -69,7 +74,7 @@ def update_product():
         data['products'][product_id] = updated_product
 
         with open('data.json', 'w') as j_f:
-            json.dump(data, j_f)
+            json.dump(data, j_f,indent=2, sort_keys=True)
 
 
 def delete_product():
@@ -88,7 +93,7 @@ def delete_product():
         data['products'].pop(product_id)
 
         with open('data.json', 'w') as j_f:
-            json.dump(data, j_f)
+            json.dump(data, j_f,indent=2, sort_keys=True)
 
 
 def menu():
@@ -96,16 +101,17 @@ def menu():
     print('\t\t----------WELCOME TO INVENTORY----------')
     print('1- Add product')
     print('2- Search product')
-    print('3- Update product')
-    print('4- Delete product')
-    print('5- Exit')
+    print('3- View Products')
+    print('4- Update product')
+    print('5- Delete product')
+    print('6- Exit')
 
     option = int(input('Enter option: ').strip())
 
-    if option == 5:
+    if option == 6:
         return
 
-    if option < 1 or option > 4:
+    if option < 1 or option > 5:
         print('Invalid option')
         input('Press <enter> key to continue ...')
         return menu()
@@ -114,7 +120,9 @@ def menu():
         add_product()
     elif option == 2:
         search_product()
-    elif option == 3:
+    elif option==3:
+        view_product()
+    elif option == 4:
         update_product()
     else:
         delete_product()
