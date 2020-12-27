@@ -1,6 +1,1 @@
-{
-  "credentials": {
-    "username": "admin",
-    "password": "12345"
-  }
-}
+{"credentials": {"password": "12345", "username": "admin"}, "products": {"6069": {"name": "onion", "price": 30.0}, "621": {"name": "potato chips", "price": 100.0}}}
